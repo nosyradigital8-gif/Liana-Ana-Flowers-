@@ -114,8 +114,8 @@ const Header = () => {
                 onClick={() => setIsCartOpen(true)}
                 className={`relative transition-colors ${
                   isScrolled
-                    ? 'border-primary text-primary hover:bg-primary hover:text-white'
-                    : 'border-white text-white hover:bg-white hover:text-black'
+                    ? 'border-primary text-primary '
+                    : 'border-white text-white '
                 }`}
               >
                 <ShoppingBag className="w-5 h-5" />
