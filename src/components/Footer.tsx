@@ -10,7 +10,7 @@ import {
   Facebook,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import logoImage from "@/assets/logo.jpg";
+import logoImage from "@/assets/logo-light.png";
 
 const Footer = () => {
   const handleWhatsAppClick = () => {
