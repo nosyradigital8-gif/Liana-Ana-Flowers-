@@ -178,25 +178,7 @@ const Hero = () => {
         </div>
       </div>
 
-      {/* Navigation Arrows */}
-      <div className="absolute inset-y-0 left-4 right-4 flex items-center justify-between pointer-events-none z-20">
-        <motion.button
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.9 }}
-          onClick={prevSlide}
-          className="pointer-events-auto p-3 rounded-full bg-primary-foreground/20 backdrop-blur-sm text-primary-foreground hover:bg-primary-foreground/30 transition-colors"
-        >
-          <ChevronLeft className="w-6 h-6" />
-        </motion.button>
-        <motion.button
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.9 }}
-          onClick={nextSlide}
-          className="pointer-events-auto p-3 rounded-full bg-primary-foreground/20 backdrop-blur-sm text-primary-foreground hover:bg-primary-foreground/30 transition-colors"
-        >
-          <ChevronRight className="w-6 h-6" />
-        </motion.button>
-      </div>
+
 
       {/* Dots */}
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-3 z-20">
