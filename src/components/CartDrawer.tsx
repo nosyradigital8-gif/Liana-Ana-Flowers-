@@ -1,24 +1,16 @@
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Plus, Minus, Trash2, ShoppingBag, MessageCircle } from 'lucide-react';
+import { X, Plus, Minus, Trash2, ShoppingBag, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useCart } from '@/contexts/CartContext';
+import { useNavigate } from 'react-router-dom';
 
 const CartDrawer = () => {
+  const navigate = useNavigate();
   const { items, isCartOpen, setIsCartOpen, totalPrice, updateQuantity, removeItem } = useCart();
 
   const handleCheckout = () => {
-    const orderDetails = items
-      .map(
-        (item) =>
-          `• ${item.name} x${item.quantity} - ₦${(item.price * item.quantity).toLocaleString()}`
-      )
-      .join('\n');
-
-    const message = encodeURIComponent(
-      `Hi Lian-Ana Flowers! 🌹\n\nI'd like to order:\n\n${orderDetails}\n\n*Total: ₦${totalPrice.toLocaleString()}*\n\nPlease confirm availability and delivery details.`
-    );
-
-    window.open(`https://wa.me/2347031677165?text=${message}`, '_blank');
+    setIsCartOpen(false);
+    navigate('/checkout');
   };
 
   const formatPrice = (price: number) => `₦${price.toLocaleString()}`;
@@ -85,13 +77,11 @@ const CartDrawer = () => {
                         transition={{ delay: index * 0.1 }}
                         className="flex gap-4 p-4 bg-card rounded-lg shadow-card"
                       >
-                        <img
-                          src={item.image}
-                          alt={item.name}
-                          className="w-20 h-20 object-cover rounded-md"
-                        />
+                        <div className="w-16 h-16 bg-secondary rounded-md flex items-center justify-center text-2xl">
+                          {item.category === 'addon' ? '🎁' : '🌹'}
+                        </div>
                         <div className="flex-1">
-                          <h3 className="font-medium text-sm">{item.name}</h3>
+                          <h3 className="font-medium text-sm line-clamp-1">{item.name}</h3>
                           <p className="text-primary font-semibold mt-1">
                             {formatPrice(item.price)}
                           </p>
@@ -144,7 +134,7 @@ const CartDrawer = () => {
                 className="border-t border-border p-6 space-y-4"
               >
                 <div className="flex justify-between items-center text-lg font-semibold">
-                  <span>Total</span>
+                  <span>Subtotal</span>
                   <span className="text-primary">{formatPrice(totalPrice)}</span>
                 </div>
                 <p className="text-xs text-muted-foreground">
@@ -154,8 +144,8 @@ const CartDrawer = () => {
                   onClick={handleCheckout}
                   className="w-full gradient-primary text-primary-foreground hover:opacity-90 h-12"
                 >
-                  <MessageCircle className="w-5 h-5 mr-2" />
-                  Checkout via WhatsApp
+                  Proceed to Checkout
+                  <ArrowRight className="w-5 h-5 ml-2" />
                 </Button>
               </motion.div>
             )}
