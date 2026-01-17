@@ -1,17 +1,27 @@
-import { motion } from 'framer-motion';
-import { Heart, MapPin, Phone, Mail, Clock, MessageCircle, Instagram, Facebook } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import logoImage from '@/assets/logo.jpg';
+import { motion } from "framer-motion";
+import {
+  Heart,
+  MapPin,
+  Phone,
+  Mail,
+  Clock,
+  MessageCircle,
+  Instagram,
+  Facebook,
+} from "lucide-react";
+import { Button } from "@/components/ui/button";
+import logoImage from "@/assets/logo.jpg";
 
 const Footer = () => {
   const handleWhatsAppClick = () => {
-    window.open('https://wa.me/2347031677165', '_blank');
+    window.open("https://wa.me/2347031677165", "_blank");
   };
 
   return (
     <footer id="contact" className="bg-foreground text-primary-foreground pt-16 pb-8">
-      <div className="container">
+      <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
+
           {/* Brand */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -19,13 +29,14 @@ const Footer = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
           >
-            <img 
-              src={logoImage} 
-              alt="Lian-Ana Flowers" 
+            <img
+              src={logoImage}
+              alt="Lian-Ana Flowers"
               className="h-16 w-auto mb-4 brightness-0 invert"
             />
             <p className="text-primary-foreground/70 text-sm mb-4">
-              Handcrafted floral arrangements delivered fresh across Lagos. Making moments special since our founding.
+              Handcrafted floral arrangements delivered fresh across Lagos. Making
+              moments special since our founding.
             </p>
             <Button
               onClick={handleWhatsAppClick}
@@ -45,7 +56,13 @@ const Footer = () => {
           >
             <h4 className="font-serif font-semibold text-lg mb-4">Quick Links</h4>
             <ul className="space-y-3">
-              {['Shop Flowers', 'Valentine\'s Collection', 'Add-ons', 'About Us', 'Contact'].map((link) => (
+              {[
+                "Shop Flowers",
+                "Valentine's Collection",
+                "Add-ons",
+                "About Us",
+                "Contact",
+              ].map((link) => (
                 <li key={link}>
                   <a
                     href="#"
@@ -69,26 +86,40 @@ const Footer = () => {
             <ul className="space-y-3 text-sm">
               <li className="flex items-start gap-3">
                 <Phone className="w-4 h-4 mt-0.5 text-primary" />
-                <span className="text-primary-foreground/70">+234 703 167 7165</span>
+                <span className="text-primary-foreground/70">
+                  +234 703 167 7165
+                </span>
               </li>
               <li className="flex items-start gap-3">
                 <Mail className="w-4 h-4 mt-0.5 text-primary" />
-                <span className="text-primary-foreground/70">info@liananaflowers.com.ng</span>
+                <span className="text-primary-foreground/70">
+                  info@liananaflowers.com.ng
+                </span>
               </li>
               <li className="flex items-start gap-3">
                 <MapPin className="w-4 h-4 mt-0.5 text-primary" />
-                <span className="text-primary-foreground/70">Lagos, Nigeria</span>
+                <span className="text-primary-foreground/70">
+                  Lagos, Nigeria
+                </span>
               </li>
               <li className="flex items-start gap-3">
                 <Clock className="w-4 h-4 mt-0.5 text-primary" />
-                <span className="text-primary-foreground/70">Mon-Sat: 9AM - 7PM</span>
+                <span className="text-primary-foreground/70">
+                  Mon–Sat: 9AM – 7PM
+                </span>
               </li>
             </ul>
           </motion.div>
 
-            
-            {/* Social Links */}
-            <div className="flex gap-3 mt-6">
+          {/* Social Links */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+          >
+            <h4 className="font-serif font-semibold text-lg mb-4">Follow Us</h4>
+            <div className="flex gap-3">
               <motion.a
                 href="#"
                 whileHover={{ scale: 1.1 }}
@@ -119,7 +150,8 @@ const Footer = () => {
             © 2026 Lian-Ana Flowers. All rights reserved.
           </p>
           <p className="text-sm text-primary-foreground/50 flex items-center gap-1">
-            Made with <Heart className="w-4 h-4 text-primary fill-primary" /> in Lagos
+            Made with <Heart className="w-4 h-4 text-primary fill-primary" /> in
+            Lagos
           </p>
         </motion.div>
       </div>
