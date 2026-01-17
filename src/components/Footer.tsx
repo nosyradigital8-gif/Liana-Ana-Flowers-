@@ -32,7 +32,7 @@ const Footer = () => {
             <img
               src={logoImage}
               alt="Lian-Ana Flowers"
-              className="h-16 w-auto mb-4 brightness-0 invert"
+              className="h-32 w-auto mb-4 brightness-0 invert"
             />
             <p className="text-primary-foreground/70 text-sm mb-4">
               Handcrafted floral arrangements delivered fresh across Lagos. Making
