@@ -108,31 +108,32 @@ const Header = () => {
               </Button>
 
               {/* ===== CART (AUTO COLOR) ===== */}
-              <Button
-                variant="outline"
-                size="icon"
-                onClick={() => setIsCartOpen(true)}
-                className={`relative transition-colors ${
-                  isScrolled
-                    ? 'border-primary text-primary '
-                    : 'border-white text-white '
-                }`}
-              >
-                <ShoppingBag className="w-5 h-5" />
-                <AnimatePresence>
-                  {totalItems > 0 && (
-                    <motion.span
-                      initial={{ scale: 0 }}
-                      animate={{ scale: 1 }}
-                      exit={{ scale: 0 }}
-                      className="absolute -top-2 -right-2 w-5 h-5 bg-accent text-accent-foreground text-xs font-bold rounded-full flex items-center justify-center"
-                    >
-                      {totalItems}
-                    </motion.span>
-                  )}
-                </AnimatePresence>
-              </Button>
+              
+<button
+  onClick={() => setIsCartOpen(true)}
+  className="relative flex items-center justify-center p-2 bg-transparent border-none outline-none
+             hover:bg-transparent focus:bg-transparent active:bg-transparent"
+>
+  <ShoppingBag
+    className={`w-5 h-5 transition-colors ${
+      isScrolled ? 'text-primary' : 'text-white'
+    }`}
+  />
 
+  <AnimatePresence>
+    {totalItems > 0 && (
+      <motion.span
+        initial={{ scale: 0 }}
+        animate={{ scale: 1 }}
+        exit={{ scale: 0 }}
+        className="absolute -top-2 -right-2 w-5 h-5 bg-accent text-accent-foreground
+                   text-xs font-bold rounded-full flex items-center justify-center"
+      >
+        {totalItems}
+      </motion.span>
+    )}
+  </AnimatePresence>
+</button>
               {/* ===== HAMBURGER ===== */}
               <Button
                 variant="ghost"
