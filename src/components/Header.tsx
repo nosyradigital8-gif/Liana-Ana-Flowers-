@@ -63,7 +63,7 @@ const Header = () => {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.3 }}
-                className={`h-16 md:h-20 w-auto object-contain transition-all ${
+                className={`h-36 md:h-20 w-auto object-contain transition-all ${
                   !isScrolled
                     ? 'drop-shadow-[0_3px_12px_rgba(0,0,0,0.5)]'
                     : ''
