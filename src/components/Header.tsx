@@ -4,7 +4,10 @@ import { ShoppingBag, Menu, X, MessageCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useCart } from '@/contexts/CartContext';
 import CartDrawer from './CartDrawer';
-import logoImage from '@/assets/logo.jpg';
+
+// 🔁 Auto logo versions
+import logoLight from '@/assets/logo-light.png'; // white logo
+import logoDark from '@/assets/logo-dark.png';   // pink logo
 
 const navItems = [
   { label: 'Home', href: '#' },
@@ -19,9 +22,10 @@ const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { totalItems, setIsCartOpen } = useCart();
 
+  // ===== Scroll detection (AUTO MODE) =====
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+      setIsScrolled(window.scrollY > 60);
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
@@ -31,35 +35,47 @@ const Header = () => {
     window.open('https://wa.me/2347031677165', '_blank');
   };
 
+  // ===== Auto logo logic =====
+  const activeLogo = isScrolled ? logoDark : logoLight;
+
   return (
     <>
+      {/* ================= HEADER ================= */}
       <motion.header
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.6, ease: 'easeOut' }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           isScrolled
-            ? 'bg-background/95 backdrop-blur-md shadow-soft'
+            ? 'bg-background/95 backdrop-blur-md shadow-md'
             : 'bg-transparent'
         }`}
       >
         <div className="container py-4">
           <nav className="flex items-center justify-between">
-            
-            {/* Logo */}
+
+            {/* ===== LOGO (AUTO LIGHT/DARK) ===== */}
             <motion.a
               href="#"
-              whileHover={{ scale: 1.02 }}
-              className="flex items-center gap-2"
+              whileHover={{ scale: 1.03 }}
+              className="flex items-center"
             >
-              <img
-                src={logoImage}
+              <motion.img
+                key={isScrolled ? 'dark-logo' : 'light-logo'}
+                src={activeLogo}
                 alt="Lian-Ana Flowers"
-                className="h-12 w-auto object-contain drop-shadow-md"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.25 }}
+                className={`h-12 w-auto object-contain ${
+                  !isScrolled
+                    ? 'drop-shadow-[0_2px_10px_rgba(0,0,0,0.45)]'
+                    : ''
+                }`}
               />
             </motion.a>
 
-            {/* Desktop Navigation */}
+            {/* ===== DESKTOP NAV ===== */}
             <div className="hidden lg:flex items-center gap-8">
               {navItems.map((item) => (
                 <motion.a
@@ -82,126 +98,114 @@ const Header = () => {
               ))}
             </div>
 
-            {/* Right Actions */}
+            {/* ===== ACTIONS ===== */}
             <div className="flex items-center gap-3">
-              
+
               {/* WhatsApp */}
-              <motion.div
-                animate={{ scale: [1, 1.05, 1] }}
-                transition={{ duration: 2, repeat: Infinity }}
+              <Button
+                variant="outline"
+                size="icon"
+                onClick={handleWhatsAppClick}
+                className="border-[#25D366] text-[#25D366] hover:bg-[#25D366] hover:text-white hidden sm:flex"
               >
-                <Button
-                  variant="outline"
-                  size="icon"
-                  onClick={handleWhatsAppClick}
-                  className="border-[#25D366] text-[#25D366] hover:bg-[#25D366] hover:text-primary-foreground hidden sm:flex"
-                >
-                  <MessageCircle className="w-5 h-5" />
-                </Button>
-              </motion.div>
+                <MessageCircle className="w-5 h-5" />
+              </Button>
 
               {/* Cart */}
-              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                <Button
-                  variant="outline"
-                  size="icon"
-                  onClick={() => setIsCartOpen(true)}
-                  className={`relative ${
-                    isScrolled
-                      ? 'border-primary text-primary hover:bg-primary hover:text-primary-foreground'
-                      : 'border-white text-white hover:bg-white hover:text-black'
-                  }`}
-                >
-                  <ShoppingBag className="w-5 h-5" />
-                  <AnimatePresence>
-                    {totalItems > 0 && (
-                      <motion.span
-                        initial={{ scale: 0 }}
-                        animate={{ scale: 1 }}
-                        exit={{ scale: 0 }}
-                        className="absolute -top-2 -right-2 w-5 h-5 bg-accent text-accent-foreground text-xs font-bold rounded-full flex items-center justify-center"
-                      >
-                        {totalItems}
-                      </motion.span>
-                    )}
-                  </AnimatePresence>
-                </Button>
-              </motion.div>
+              <Button
+                variant="outline"
+                size="icon"
+                onClick={() => setIsCartOpen(true)}
+                className={`relative transition-colors ${
+                  isScrolled
+                    ? 'border-primary text-primary hover:bg-primary hover:text-white'
+                    : 'border-white text-white hover:bg-white hover:text-black'
+                }`}
+              >
+                <ShoppingBag className="w-5 h-5" />
+                <AnimatePresence>
+                  {totalItems > 0 && (
+                    <motion.span
+                      initial={{ scale: 0 }}
+                      animate={{ scale: 1 }}
+                      exit={{ scale: 0 }}
+                      className="absolute -top-2 -right-2 w-5 h-5 bg-accent text-accent-foreground text-xs font-bold rounded-full flex items-center justify-center"
+                    >
+                      {totalItems}
+                    </motion.span>
+                  )}
+                </AnimatePresence>
+              </Button>
 
-              {/* Hamburger Menu */}
+              {/* Hamburger */}
               <Button
                 variant="ghost"
                 size="icon"
-                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                onClick={() => setIsMobileMenuOpen(true)}
                 className={`lg:hidden ${
                   isScrolled ? 'text-foreground' : 'text-white'
                 }`}
               >
-                <AnimatePresence mode="wait">
-                  {isMobileMenuOpen ? (
-                    <motion.div
-                      key="close"
-                      initial={{ rotate: -90, opacity: 0 }}
-                      animate={{ rotate: 0, opacity: 1 }}
-                      exit={{ rotate: 90, opacity: 0 }}
-                    >
-                      <X className="w-6 h-6 text-current" />
-                    </motion.div>
-                  ) : (
-                    <motion.div
-                      key="menu"
-                      initial={{ rotate: 90, opacity: 0 }}
-                      animate={{ rotate: 0, opacity: 1 }}
-                      exit={{ rotate: -90, opacity: 0 }}
-                    >
-                      <Menu className="w-6 h-6 text-current" />
-                    </motion.div>
-                  )}
-                </AnimatePresence>
+                <Menu className="w-6 h-6" />
               </Button>
             </div>
           </nav>
         </div>
-
-        {/* Mobile Menu */}
-        <AnimatePresence>
-          {isMobileMenuOpen && (
-            <motion.div
-              initial={{ x: '100%' }}
-              animate={{ x: 0 }}
-              exit={{ x: '100%' }}
-              transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-              className="fixed inset-y-0 right-0 w-full max-w-sm bg-background shadow-elevated z-50 lg:hidden"
-            >
-              <div className="flex flex-col h-full p-6 pt-20">
-                {navItems.map((item, index) => (
-                  <motion.a
-                    key={item.label}
-                    href={item.href}
-                    initial={{ x: 50, opacity: 0 }}
-                    animate={{ x: 0, opacity: 1 }}
-                    transition={{ delay: index * 0.1 }}
-                    onClick={() => setIsMobileMenuOpen(false)}
-                    className="py-4 text-xl font-serif font-semibold text-foreground border-b border-border hover:text-primary"
-                  >
-                    {item.label}
-                  </motion.a>
-                ))}
-
-                <div className="mt-auto">
-                  <Button
-                    onClick={handleWhatsAppClick}
-                    className="w-full bg-[#25D366] hover:bg-[#20BD5C] text-primary-foreground"
-                  >
-                    <MessageCircle className="w-5 h-5 mr-2" />
-                    Chat on WhatsApp
-                  </Button>
-                </div>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
       </motion.header>
+
+      {/* ================= MOBILE MENU (SOLID FIXED) ================= */}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div
+            initial={{ x: '100%' }}
+            animate={{ x: 0 }}
+            exit={{ x: '100%' }}
+            transition={{ type: 'spring', stiffness: 220, damping: 28 }}
+            className="fixed inset-0 z-[60] bg-background lg:hidden"
+          >
+            {/* Mobile Header */}
+            <div className="flex items-center justify-between p-6 border-b">
+              <img
+                src={logoDark}
+                alt="Logo"
+                className="h-10 w-auto object-contain"
+              />
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                <X className="w-6 h-6" />
+              </Button>
+            </div>
+
+            {/* Mobile Links */}
+            <div className="flex flex-col p-6">
+              {navItems.map((item, index) => (
+                <motion.a
+                  key={item.label}
+                  href={item.href}
+                  initial={{ opacity: 0, x: 40 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: index * 0.08 }}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="py-4 text-lg font-semibold border-b border-border text-foreground hover:text-primary"
+                >
+                  {item.label}
+                </motion.a>
+              ))}
+
+              <Button
+                onClick={handleWhatsAppClick}
+                className="mt-8 bg-[#25D366] hover:bg-[#20BD5C] text-white"
+              >
+                <MessageCircle className="w-5 h-5 mr-2" />
+                Chat on WhatsApp
+              </Button>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       <CartDrawer />
     </>
