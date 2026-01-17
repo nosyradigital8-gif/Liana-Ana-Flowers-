@@ -22,7 +22,6 @@ const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { totalItems, setIsCartOpen } = useCart();
 
-  // ===== Scroll detection (AUTO MODE) =====
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 60);
@@ -34,9 +33,6 @@ const Header = () => {
   const handleWhatsAppClick = () => {
     window.open('https://wa.me/2347031677165', '_blank');
   };
-
-  // ===== Auto logo logic =====
-  const activeLogo = isScrolled ? logoDark : logoLight;
 
   return (
     <>
@@ -54,22 +50,22 @@ const Header = () => {
         <div className="container py-4">
           <nav className="flex items-center justify-between">
 
-            {/* ===== LOGO (AUTO LIGHT/DARK) ===== */}
+            {/* ===== LOGO (AUTO LIGHT / DARK + BIGGER) ===== */}
             <motion.a
               href="#"
-              whileHover={{ scale: 1.03 }}
+              whileHover={{ scale: 1.04 }}
               className="flex items-center"
             >
               <motion.img
-                key={isScrolled ? 'dark-logo' : 'light-logo'}
-                src={activeLogo}
+                key={isScrolled ? 'logo-dark' : 'logo-light'}
+                src={isScrolled ? logoDark : logoLight}
                 alt="Lian-Ana Flowers"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                transition={{ duration: 0.25 }}
-                className={`h-12 w-auto object-contain ${
+                transition={{ duration: 0.3 }}
+                className={`h-16 md:h-20 w-auto object-contain transition-all ${
                   !isScrolled
-                    ? 'drop-shadow-[0_2px_10px_rgba(0,0,0,0.45)]'
+                    ? 'drop-shadow-[0_3px_12px_rgba(0,0,0,0.5)]'
                     : ''
                 }`}
               />
@@ -111,7 +107,7 @@ const Header = () => {
                 <MessageCircle className="w-5 h-5" />
               </Button>
 
-              {/* Cart */}
+              {/* ===== CART (AUTO COLOR) ===== */}
               <Button
                 variant="outline"
                 size="icon"
@@ -137,7 +133,7 @@ const Header = () => {
                 </AnimatePresence>
               </Button>
 
-              {/* Hamburger */}
+              {/* ===== HAMBURGER ===== */}
               <Button
                 variant="ghost"
                 size="icon"
@@ -146,14 +142,14 @@ const Header = () => {
                   isScrolled ? 'text-foreground' : 'text-white'
                 }`}
               >
-                <Menu className="w-6 h-6" />
+                <Menu className="w-7 h-7" />
               </Button>
             </div>
           </nav>
         </div>
       </motion.header>
 
-      {/* ================= MOBILE MENU (SOLID FIXED) ================= */}
+      {/* ================= MOBILE MENU (SOLID) ================= */}
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
@@ -168,7 +164,7 @@ const Header = () => {
               <img
                 src={logoDark}
                 alt="Logo"
-                className="h-10 w-auto object-contain"
+                className="h-14 w-auto object-contain"
               />
               <Button
                 variant="ghost"
