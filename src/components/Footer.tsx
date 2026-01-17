@@ -86,20 +86,6 @@ const Footer = () => {
             </ul>
           </motion.div>
 
-          {/* Payment Info */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-          >
-            <h4 className="font-serif font-semibold text-lg mb-4">Payment Details</h4>
-            <div className="bg-primary-foreground/10 rounded-lg p-4 text-sm">
-              <p className="text-primary-foreground/70 mb-2">Bank Transfer</p>
-              <p className="font-medium">UBA</p>
-              <p className="text-primary-foreground/70">Floral and Creations</p>
-              <p className="font-mono font-semibold text-primary mt-1">1024612778</p>
-            </div>
             
             {/* Social Links */}
             <div className="flex gap-3 mt-6">
