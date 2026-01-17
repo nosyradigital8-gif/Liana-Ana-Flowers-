@@ -45,16 +45,17 @@ const Header = () => {
       >
         <div className="container py-4">
           <nav className="flex items-center justify-between">
+            
             {/* Logo */}
             <motion.a
               href="#"
               whileHover={{ scale: 1.02 }}
               className="flex items-center gap-2"
             >
-              <img 
-                src={logoImage} 
-                alt="Lian-Ana Flowers" 
-                className="h-12 w-auto object-contain"
+              <img
+                src={logoImage}
+                alt="Lian-Ana Flowers"
+                className="h-12 w-auto object-contain drop-shadow-md"
               />
             </motion.a>
 
@@ -64,8 +65,12 @@ const Header = () => {
                 <motion.a
                   key={item.label}
                   href={item.href}
-                  className="relative font-medium text-foreground/80 hover:text-primary transition-colors"
                   whileHover={{ scale: 1.05 }}
+                  className={`relative font-medium transition-colors ${
+                    isScrolled
+                      ? 'text-foreground/80 hover:text-primary'
+                      : 'text-white hover:text-white/80'
+                  }`}
                 >
                   {item.label}
                   <motion.span
@@ -77,9 +82,10 @@ const Header = () => {
               ))}
             </div>
 
-            {/* Right Side Actions */}
+            {/* Right Actions */}
             <div className="flex items-center gap-3">
-              {/* WhatsApp Button */}
+              
+              {/* WhatsApp */}
               <motion.div
                 animate={{ scale: [1, 1.05, 1] }}
                 transition={{ duration: 2, repeat: Infinity }}
@@ -94,13 +100,17 @@ const Header = () => {
                 </Button>
               </motion.div>
 
-              {/* Cart Button */}
+              {/* Cart */}
               <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                 <Button
                   variant="outline"
                   size="icon"
                   onClick={() => setIsCartOpen(true)}
-                  className="relative border-primary text-primary hover:bg-primary hover:text-primary-foreground"
+                  className={`relative ${
+                    isScrolled
+                      ? 'border-primary text-primary hover:bg-primary hover:text-primary-foreground'
+                      : 'border-white text-white hover:bg-white hover:text-black'
+                  }`}
                 >
                   <ShoppingBag className="w-5 h-5" />
                   <AnimatePresence>
@@ -118,12 +128,14 @@ const Header = () => {
                 </Button>
               </motion.div>
 
-              {/* Mobile Menu Button */}
+              {/* Hamburger Menu */}
               <Button
                 variant="ghost"
                 size="icon"
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                className="lg:hidden"
+                className={`lg:hidden ${
+                  isScrolled ? 'text-foreground' : 'text-white'
+                }`}
               >
                 <AnimatePresence mode="wait">
                   {isMobileMenuOpen ? (
@@ -133,7 +145,7 @@ const Header = () => {
                       animate={{ rotate: 0, opacity: 1 }}
                       exit={{ rotate: 90, opacity: 0 }}
                     >
-                      <X className="w-6 h-6" />
+                      <X className="w-6 h-6 text-current" />
                     </motion.div>
                   ) : (
                     <motion.div
@@ -142,7 +154,7 @@ const Header = () => {
                       animate={{ rotate: 0, opacity: 1 }}
                       exit={{ rotate: -90, opacity: 0 }}
                     >
-                      <Menu className="w-6 h-6" />
+                      <Menu className="w-6 h-6 text-current" />
                     </motion.div>
                   )}
                 </AnimatePresence>
@@ -170,18 +182,13 @@ const Header = () => {
                     animate={{ x: 0, opacity: 1 }}
                     transition={{ delay: index * 0.1 }}
                     onClick={() => setIsMobileMenuOpen(false)}
-                    className="py-4 text-xl font-serif font-semibold text-foreground border-b border-border hover:text-primary transition-colors"
+                    className="py-4 text-xl font-serif font-semibold text-foreground border-b border-border hover:text-primary"
                   >
                     {item.label}
                   </motion.a>
                 ))}
-                
-                <motion.div
-                  initial={{ y: 20, opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
-                  transition={{ delay: 0.5 }}
-                  className="mt-auto"
-                >
+
+                <div className="mt-auto">
                   <Button
                     onClick={handleWhatsAppClick}
                     className="w-full bg-[#25D366] hover:bg-[#20BD5C] text-primary-foreground"
@@ -189,7 +196,7 @@ const Header = () => {
                     <MessageCircle className="w-5 h-5 mr-2" />
                     Chat on WhatsApp
                   </Button>
-                </motion.div>
+                </div>
               </div>
             </motion.div>
           )}
