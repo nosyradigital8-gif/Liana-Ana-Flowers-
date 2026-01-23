@@ -12,10 +12,47 @@ const Contact = () => {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showToast, setShowToast] = useState(false);
+  const [lastSubmitTime, setLastSubmitTime] = useState(0);
+  const [submitCount, setSubmitCount] = useState(0);
 
   const handleSubmit = async () => {
-    if (!formData.name || !formData.email || !formData.message) {
+    // Prevent multiple submissions
+    if (isSubmitting) {
+      return;
+    }
+
+    // Rate limiting: Prevent submission if less than 60 seconds since last submit
+    const now = Date.now();
+    const timeSinceLastSubmit = now - lastSubmitTime;
+    
+    if (timeSinceLastSubmit < 60000 && lastSubmitTime !== 0) {
+      const waitTime = Math.ceil((60000 - timeSinceLastSubmit) / 1000);
+      alert(`Please wait ${waitTime} seconds before submitting again.`);
+      return;
+    }
+
+    // Enhanced validation
+    if (!formData.name.trim() || !formData.email.trim() || !formData.message.trim()) {
       alert('Please fill in all required fields');
+      return;
+    }
+
+    // Email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.email)) {
+      alert('Please enter a valid email address');
+      return;
+    }
+
+    // Message length validation
+    if (formData.message.trim().length < 10) {
+      alert('Please provide a more detailed message (at least 10 characters)');
+      return;
+    }
+
+    // Prevent rapid-fire submissions
+    if (submitCount >= 3) {
+      alert('Maximum submission limit reached. Please contact us directly via phone or WhatsApp.');
       return;
     }
 
@@ -23,31 +60,39 @@ const Contact = () => {
     
     try {
       const formDataObj = new FormData();
-      formDataObj.append('name', formData.name);
-      formDataObj.append('email', formData.email);
-      formDataObj.append('phone', formData.phone);
-      formDataObj.append('message', formData.message);
+      formDataObj.append('name', formData.name.trim());
+      formDataObj.append('email', formData.email.trim());
+      formDataObj.append('phone', formData.phone.trim());
+      formDataObj.append('message', formData.message.trim());
       formDataObj.append('_subject', 'New message from Lianana Flowers website!');
       formDataObj.append('_captcha', 'false');
       formDataObj.append('_template', 'table');
+      formDataObj.append('_next', window.location.href); // Redirect back to same page
       
-      await fetch('https://formsubmit.co/info@liananaflowers.com.ng', {
+      const response = await fetch('https://formsubmit.co/info@liananaflowers.com.ng', {
         method: 'POST',
         body: formDataObj,
         headers: {
           'Accept': 'application/json'
         }
       });
+
+      if (!response.ok) {
+        throw new Error('Failed to send message');
+      }
       
+      // Success
       setShowToast(true);
       setFormData({ name: '', email: '', phone: '', message: '' });
+      setLastSubmitTime(now);
+      setSubmitCount(prev => prev + 1);
       
       setTimeout(() => {
         setShowToast(false);
       }, 5000);
     } catch (error) {
       console.error('Error submitting form:', error);
-      alert('There was an error sending your message. Please try again.');
+      alert('There was an error sending your message. Please try again or contact us via WhatsApp.');
     } finally {
       setIsSubmitting(false);
     }
