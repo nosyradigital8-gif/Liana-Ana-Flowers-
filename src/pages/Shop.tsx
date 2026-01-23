@@ -3,7 +3,7 @@ import { products, categories } from '@/data/products';
 import { ProductCard } from '@/components/ProductCard';
 import { Button } from '@/components/ui/button';
 
-export const Shop = () => {
+const Shop = () => {
   const [selectedCategory, setSelectedCategory] = useState('all');
 
   const filteredProducts = selectedCategory === 'all'
@@ -46,3 +46,5 @@ export const Shop = () => {
     </div>
   );
 };
+
+export default Shop;

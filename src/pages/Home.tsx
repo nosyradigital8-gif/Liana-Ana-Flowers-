@@ -3,7 +3,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
 import Home from "@/pages/Home";
-import { Shop } from './Shop'; // ✅ matches your named export
+import Shop from './Shop';
 import ProductDetail from "@/pages/ProductDetail";
 import About from "@/pages/About";
 import Contact from "@/pages/Contact";
