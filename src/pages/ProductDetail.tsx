@@ -1,6 +1,6 @@
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { motion } from 'framer-motion';
-import { Sparkles, ArrowLeft, ShoppingCart, Heart, Share2, Star } from "lucide-react";
+import { ArrowLeft, ShoppingCart, Star, Sparkles } from "lucide-react";
 import { products } from "@/data/products";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -43,12 +43,9 @@ const ProductDetail = () => {
     );
   }
 
-  const formatPrice = (price: string) => {
-    return `₦${parseInt(price).toLocaleString()}`;
-  };
+  const formatPrice = (price: string) => `₦${parseInt(price).toLocaleString()}`;
 
   const handleAddToCart = () => {
-    // Add product to cart without quantity (it's added automatically by context)
     addItem({
       id: product.id,
       name: product.name,
@@ -56,39 +53,28 @@ const ProductDetail = () => {
       category: product.category,
       image: product.image
     });
-    
-    // Open cart drawer
     setIsCartOpen(true);
-    
-    // Show success toast
     toast.success(`${product.name} added to cart!`);
-  };
-
-  const handleAddToWishlist = () => {
-    toast.success(`${product.name} added to wishlist!`);
-  };
-
-  const handleShare = async () => {
-    if (navigator.share) {
-      try {
-        await navigator.share({
-          title: product.name,
-          text: `Check out ${product.name} at Lian-Ana Flowers`,
-          url: window.location.href,
-        });
-      } catch (err) {
-        console.log('Error sharing:', err);
-      }
-    } else {
-      // Fallback: copy to clipboard
-      navigator.clipboard.writeText(window.location.href);
-      toast.success("Link copied to clipboard!");
-    }
   };
 
   const relatedProducts = products
     .filter((p) => p.category === product.category && p.id !== product.id)
     .slice(0, 4);
+
+  // Dynamic "What's Included" based on category
+  const includedItems =
+    product.category === 'extras'
+      ? [
+          'Premium quality product',
+          'Gift-ready packaging',
+          'Optional add-ons available',
+        ]
+      : [
+          'Premium fresh flowers',
+          'Professional arrangement',
+          'Complimentary greeting card',
+          'Same-day delivery in Abuja',
+        ];
 
   return (
     <div>
@@ -105,17 +91,8 @@ const ProductDetail = () => {
             <motion.div
               key={i}
               className="absolute text-3xl"
-              initial={{ 
-                y: '100%', 
-                x: `${Math.random() * 100}%`,
-                opacity: 0.3,
-                rotate: 0
-              }}
-              animate={{
-                y: '-20%',
-                rotate: 360,
-                opacity: [0.2, 0.4, 0.2],
-              }}
+              initial={{ y: '100%', x: `${Math.random() * 100}%`, opacity: 0.3, rotate: 0 }}
+              animate={{ y: '-20%', rotate: 360, opacity: [0.2, 0.4, 0.2] }}
               transition={{
                 duration: 15 + Math.random() * 10,
                 repeat: Infinity,
@@ -186,8 +163,8 @@ const ProductDetail = () => {
                 alt={product.name}
                 className="w-full h-auto object-cover hover:scale-105 transition-transform duration-500"
                 onError={(e) => {
-                  // Fallback if image fails to load
-                  e.currentTarget.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="400"%3E%3Crect width="400" height="400" fill="%23f3f4f6"/%3E%3Ctext x="50%25" y="50%25" dominant-baseline="middle" text-anchor="middle" font-family="sans-serif" font-size="24" fill="%239ca3af"%3ENo Image%3C/text%3E%3C/svg%3E';
+                  e.currentTarget.src =
+                    'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="400"%3E%3Crect width="400" height="400" fill="%23f3f4f6"/%3E%3Ctext x="50%25" y="50%25" dominant-baseline="middle" text-anchor="middle" font-family="sans-serif" font-size="24" fill="%239ca3af"%3ENo Image%3C/text%3E%3C/svg%3E';
                 }}
               />
               {product.sale && (
@@ -200,26 +177,6 @@ const ProductDetail = () => {
                   Featured
                 </Badge>
               )}
-            </div>
-
-            {/* Action buttons below image */}
-            <div className="flex gap-3 mt-6">
-              <Button 
-                variant="outline" 
-                className="flex-1 hover:bg-rose-50 hover:text-rose-600 hover:border-rose-300"
-                onClick={handleAddToWishlist}
-              >
-                <Heart className="w-4 h-4 mr-2" />
-                Add to Wishlist
-              </Button>
-              <Button 
-                variant="outline" 
-                className="flex-1 hover:bg-rose-50 hover:text-rose-600 hover:border-rose-300"
-                onClick={handleShare}
-              >
-                <Share2 className="w-4 h-4 mr-2" />
-                Share
-              </Button>
             </div>
           </motion.div>
 
@@ -256,52 +213,35 @@ const ProductDetail = () => {
                   </span>
                 </div>
                 {product.note && (
-                  <span className="text-gray-600 text-sm">
-                    {product.note}
-                  </span>
+                  <span className="text-gray-600 text-sm">{product.note}</span>
                 )}
               </div>
 
               <div className="mb-8">
                 <h3 className="font-bold text-gray-900 mb-3 text-lg">Description</h3>
-                <p className="text-gray-700 leading-relaxed">
-                  {product.description}
-                </p>
+                <p className="text-gray-700 leading-relaxed">{product.description}</p>
               </div>
 
+              {/* Dynamic What's Included */}
               <div className="bg-white border border-gray-200 rounded-xl p-6 mb-6">
                 <h4 className="font-bold text-gray-900 mb-3">What's Included:</h4>
                 <ul className="space-y-2 text-gray-700">
-                  <li className="flex items-start">
-                    <span className="text-rose-600 mr-2">✓</span>
-                    Premium fresh flowers
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-rose-600 mr-2">✓</span>
-                    Professional arrangement
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-rose-600 mr-2">✓</span>
-                    Complimentary greeting card
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-rose-600 mr-2">✓</span>
-                    Same-day delivery in Lagos
-                  </li>
+                  {includedItems.map((item, index) => (
+                    <li key={index} className="flex items-start">
+                      <span className="text-rose-600 mr-2">✓</span>
+                      {item}
+                    </li>
+                  ))}
                 </ul>
               </div>
 
-              <Button 
+              <Button
                 className="w-full bg-gradient-to-r from-rose-600 to-pink-600 hover:from-rose-700 hover:to-pink-700 text-white text-lg py-7 shadow-xl hover:shadow-2xl transition-all duration-300"
                 onClick={handleAddToCart}
               >
                 <ShoppingCart className="w-5 h-5 mr-2" />
                 Add to Cart
               </Button>
-
-              <p className="text-center text-gray-500 text-sm mt-4">
-                🚚 Free delivery on orders above ₦50,000
-              </p>
             </div>
           </motion.div>
         </div>
@@ -323,7 +263,7 @@ const ProductDetail = () => {
                   Explore more beautiful arrangements from our collection
                 </p>
               </div>
-              
+
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                 {relatedProducts.map((relatedProduct) => (
                   <ProductCard key={relatedProduct.id} product={relatedProduct} />
