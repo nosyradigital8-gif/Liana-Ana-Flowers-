@@ -45,8 +45,7 @@ const Footer = () => {
               />
             </Link>
             <p className="text-primary-foreground/70 text-sm mb-4">
-              Handcrafted floral arrangements delivered fresh across Lagos. Making
-              moments special since our founding.
+              Handcrafted floral arrangements delivered fresh across Nigeria from Abuja. Making moments special with every bloom.
             </p>
             <Button
               onClick={handleWhatsAppClick}
@@ -109,7 +108,7 @@ const Footer = () => {
               <li className="flex items-start gap-3">
                 <MapPin className="w-4 h-4 mt-0.5 text-primary" />
                 <span className="text-primary-foreground/70">
-                  Lagos, Nigeria
+                  Abuja, Nigeria
                 </span>
               </li>
               <li className="flex items-start gap-3">
@@ -165,7 +164,7 @@ const Footer = () => {
           </p>
           <p className="text-sm text-primary-foreground/50 flex items-center gap-1">
             Made with <Heart className="w-4 h-4 text-primary fill-primary" /> in
-            Lagos
+            Abuja
           </p>
         </motion.div>
       </div>

@@ -1,70 +1,11 @@
 import { motion } from 'framer-motion';
-import { Star, ShoppingBag, Clock, Sparkles } from 'lucide-react';
+import { Star, ShoppingBag, Clock, Sparkles, Tag } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { useCart } from '@/contexts/CartContext';
-import bouquet1 from '@/assets/bouquet-1.jpg';
-import bouquet2 from '@/assets/bouquet-2.jpg';
-import bouquet3 from '@/assets/bouquet-3.jpg';
 
-const featuredProducts = [
-  {
-    id: 'ultimate-romance',
-    name: 'Ultimate Romance Package',
-    description: '100 premium red roses plus Moet champagne, Ferrero Rocher chocolates and 2ft teddy bear',
-    price: 45000,
-    originalPrice: 55000,
-    badge: 'Best Value',
-    badgeVariant: 'default' as const,
-    rating: 5,
-    reviews: 48,
-    stock: 5,
-    image: bouquet3,
-    deliveryDate: 'Feb 13',
-  },
-  {
-    id: 'classic-love',
-    name: 'Classic Love Package',
-    description: '50 long-stem red roses with premium birthday card and chocolate box',
-    price: 25000,
-    originalPrice: 30000,
-    badge: 'Most Popular',
-    badgeVariant: 'secondary' as const,
-    rating: 4.5,
-    reviews: 127,
-    stock: 8,
-    image: bouquet1,
-    deliveryDate: 'Feb 13',
-  },
-  {
-    id: 'sweet-surprise',
-    name: 'Sweet Surprise Package',
-    description: '24 mixed color roses with cute teddy bear and plain greeting card',
-    price: 18000,
-    originalPrice: 22000,
-    badge: 'Budget Pick',
-    badgeVariant: 'outline' as const,
-    rating: 4.8,
-    reviews: 89,
-    stock: 12,
-    image: bouquet2,
-    deliveryDate: 'Feb 13',
-  },
-  {
-    id: 'elegant-expression',
-    name: 'Elegant Expression Package',
-    description: 'Designer arrangement with premium red wine and luxury greeting card',
-    price: 35000,
-    originalPrice: 42000,
-    badge: 'Premium',
-    badgeVariant: 'default' as const,
-    rating: 5,
-    reviews: 36,
-    stock: 3,
-    image: bouquet1,
-    deliveryDate: 'Feb 13',
-  },
-];
+// Import actual product data
+import { products } from '@/data/products';
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -82,16 +23,19 @@ const itemVariants = {
     opacity: 1,
     y: 0,
     scale: 1,
-    transition: { duration: 0.6, ease: 'easeOut' as const },
+    transition: { duration: 0.6, ease: 'easeOut' },
   },
 };
 
 const FeaturedProducts = () => {
   const { addItem } = useCart();
 
-  const formatPrice = (price: number) => `₦${price.toLocaleString()}`;
+  // Get featured products from data
+  const featuredProducts = products.filter(p => p.featured);
 
-  const renderStars = (rating: number) => {
+  const formatPrice = (price: string) => `₦${parseInt(price).toLocaleString()}`;
+
+  const renderStars = (rating: number = 5) => {
     return [...Array(5)].map((_, i) => (
       <Star
         key={i}
@@ -140,7 +84,6 @@ const FeaturedProducts = () => {
           {featuredProducts.map((product) => (
             <motion.div
               key={product.id}
-              variants={itemVariants}
               whileHover={{ y: -8 }}
               className="bg-card rounded-xl overflow-hidden shadow-card group"
             >
@@ -153,29 +96,19 @@ const FeaturedProducts = () => {
                   whileHover={{ scale: 1.1 }}
                   transition={{ duration: 0.4 }}
                 />
-                <div className="absolute top-3 left-3">
-                  <Badge
-                    variant={product.badgeVariant}
-                    className={
-                      product.badgeVariant === 'default'
-                        ? 'gradient-primary text-primary-foreground border-0'
-                        : ''
-                    }
-                  >
-                    {product.badge}
-                  </Badge>
+                <div className="absolute top-3 left-3 flex gap-2">
+                  {product.featured && (
+                    <Badge className="gradient-primary text-primary-foreground border-0">
+                      Featured
+                    </Badge>
+                  )}
+                  {product.sale && (
+                    <Badge variant="destructive">
+                      <Tag className="w-3 h-3 mr-1" />
+                      Sale
+                    </Badge>
+                  )}
                 </div>
-                {product.stock <= 5 && (
-                  <div className="absolute bottom-3 left-3 right-3">
-                    <motion.div
-                      animate={{ opacity: [1, 0.6, 1] }}
-                      transition={{ duration: 1.5, repeat: Infinity }}
-                      className="bg-foreground/80 text-primary-foreground text-xs px-3 py-1.5 rounded-full text-center font-medium"
-                    >
-                      Only {product.stock} left in stock
-                    </motion.div>
-                  </div>
-                )}
               </div>
 
               {/* Content */}
@@ -189,9 +122,9 @@ const FeaturedProducts = () => {
 
                 {/* Rating */}
                 <div className="flex items-center gap-2 mb-3">
-                  <div className="flex">{renderStars(product.rating)}</div>
+                  <div className="flex">{renderStars(5)}</div>
                   <span className="text-xs text-muted-foreground">
-                    ({product.reviews})
+                    (4.9)
                   </span>
                 </div>
 
@@ -200,18 +133,22 @@ const FeaturedProducts = () => {
                   <span className="text-xl font-bold text-primary">
                     {formatPrice(product.price)}
                   </span>
-                  <span className="text-sm text-muted-foreground line-through">
-                    {formatPrice(product.originalPrice)}
-                  </span>
-                  <span className="text-xs font-medium text-green-600 bg-green-50 px-2 py-0.5 rounded">
-                    Save {formatPrice(product.originalPrice - product.price)}
-                  </span>
+                  {product.originalPrice && (
+                    <>
+                      <span className="text-sm text-muted-foreground line-through">
+                        {formatPrice(product.originalPrice)}
+                      </span>
+                      <span className="text-xs font-medium text-green-600 bg-green-50 px-2 py-0.5 rounded">
+                        Save {formatPrice((parseInt(product.originalPrice) - parseInt(product.price)).toString())}
+                      </span>
+                    </>
+                  )}
                 </div>
 
                 {/* Delivery */}
                 <div className="flex items-center gap-1.5 text-xs text-muted-foreground mb-4">
                   <Clock className="w-3.5 h-3.5" />
-                  Delivers by {product.deliveryDate}
+                  Same-day delivery available
                 </div>
 
                 {/* Add to Cart */}
@@ -221,8 +158,8 @@ const FeaturedProducts = () => {
                       addItem({
                         id: product.id,
                         name: product.name,
-                        price: product.price,
-                        originalPrice: product.originalPrice,
+                        price: parseInt(product.price),
+                        originalPrice: product.originalPrice ? parseInt(product.originalPrice) : undefined,
                         image: product.image,
                       })
                     }

@@ -1,57 +1,49 @@
 import { motion } from 'framer-motion';
-import { Heart, Star, Crown, Wallet, Building2, Flower } from 'lucide-react';
+import { Heart, Flower2, Box, Gift, Sparkles } from 'lucide-react';
 import bouquet1 from '@/assets/bouquet-1.jpg';
 import bouquet2 from '@/assets/bouquet-2.jpg';
 import bouquet3 from '@/assets/bouquet-3.jpg';
 
 const categories = [
   {
-    id: 'roses',
-    name: 'Roses',
-    description: 'Classic elegance in every petal',
+    id: 'all-products',
+    name: 'All Products',
+    description: 'Browse our complete collection',
+    icon: Sparkles,
+    image: bouquet1,
+    count: 30,
+  },
+  {
+    id: 'red-roses',
+    name: 'Red Roses',
+    description: 'Classic romance and elegance',
     icon: Heart,
-    image: bouquet1,
-    count: 24,
-  },
-  {
-    id: 'luxury',
-    name: 'Luxury Arrangements',
-    description: 'Premium designer collections',
-    icon: Crown,
     image: bouquet2,
-    count: 12,
+    count: 11,
   },
   {
-    id: 'budget',
-    name: 'Budget Friendly',
-    description: 'Beautiful blooms, great prices',
-    icon: Wallet,
+    id: 'mixed-bouquets',
+    name: 'Mixed Bouquets',
+    description: 'Colorful floral arrangements',
+    icon: Flower2,
     image: bouquet3,
-    count: 18,
+    count: 9,
   },
   {
-    id: 'bestsellers',
-    name: 'Bestsellers',
-    description: 'Customer favorites',
-    icon: Star,
+    id: 'box-arrangements',
+    name: 'Box Arrangements',
+    description: 'Elegant boxed presentations',
+    icon: Box,
     image: bouquet1,
-    count: 15,
+    count: 5,
   },
   {
-    id: 'corporate',
-    name: 'Corporate',
-    description: 'Professional arrangements',
-    icon: Building2,
+    id: 'extras',
+    name: 'Extras',
+    description: 'Perfect gift additions',
+    icon: Gift,
     image: bouquet2,
-    count: 8,
-  },
-  {
-    id: 'seasonal',
-    name: 'Seasonal',
-    description: 'Fresh seasonal selections',
-    icon: Flower,
-    image: bouquet3,
-    count: 20,
+    count: 5,
   },
 ];
 
@@ -70,7 +62,7 @@ const itemVariants = {
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.5, ease: 'easeOut' as const },
+    transition: { duration: 0.5, ease: 'easeOut' },
   },
 };
 
@@ -100,13 +92,12 @@ const Categories = () => {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: '-100px' }}
-          className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4"
+          className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4"
         >
           {categories.map((category) => (
             <motion.a
               key={category.id}
-              href={`#${category.id}`}
-              variants={itemVariants}
+              href="/shop"
               whileHover={{ y: -8, scale: 1.02 }}
               className="group relative overflow-hidden rounded-xl aspect-[4/5] cursor-pointer"
             >

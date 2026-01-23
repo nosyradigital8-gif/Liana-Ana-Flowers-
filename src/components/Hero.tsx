@@ -13,7 +13,7 @@ const slides = [
     badgeIcon: Heart,
     badgeColor: 'bg-red-500',
     title: 'Express Your Love with Timeless Roses',
-    subtitle: "Handcrafted arrangements delivered fresh to your loved one's doorstep in Lagos",
+    subtitle: "Handcrafted arrangements delivered fresh to your loved one's doorstep nationwide from Abuja",
     image: heroBg,
     primaryCta: { text: "Shop Valentine's Flowers", action: '#products' },
     secondaryCta: { text: 'View All Collections', action: '#products' },
@@ -24,7 +24,7 @@ const slides = [
     badgeIcon: Clock,
     badgeColor: 'bg-primary',
     title: 'Fresh Blooms Delivered Today',
-    subtitle: 'Order before 2 PM for same-day delivery across Lagos - Lekki, Victoria Island, Ikoyi and more',
+    subtitle: 'Order before 2 PM for same-day delivery in Abuja - Nationwide delivery available',
     image: bouquet1,
     primaryCta: { text: 'Order Now on WhatsApp', action: 'whatsapp', isWhatsApp: true },
     secondaryCta: { text: 'Browse Flowers', action: '#products' },
@@ -54,13 +54,14 @@ const Hero = () => {
     return () => clearInterval(interval);
   }, [isPaused]);
 
-  const goToSlide = (index: number) => setCurrentSlide(index);
+  const goToSlide = (index) => setCurrentSlide(index);
   const prevSlide = () => setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
   const nextSlide = () => setCurrentSlide((prev) => (prev + 1) % slides.length);
 
-  const handleCtaClick = (action: string, isWhatsApp?: boolean) => {
+  const handleCtaClick = (action, isWhatsApp) => {
     if (isWhatsApp) {
-      window.open('https://wa.me/2347031677165', '_blank');
+      const message = encodeURIComponent(`Hello! I'm interested in ordering flowers from your ${slides[currentSlide].badge} collection.`);
+      window.open(`https://wa.me/2347031677165?text=${message}`, '_blank');
     } else {
       window.location.href = action;
     }
@@ -167,7 +168,7 @@ const Hero = () => {
                 <Button
                   size="lg"
                   variant="outline"
-                  onClick={() => handleCtaClick(slides[currentSlide].secondaryCta.action)}
+                  onClick={() => handleCtaClick(slides[currentSlide].secondaryCta.action, false)}
                   className="h-14 px-8 text-base font-semibold border-primary-foreground/40 text-primary-foreground hover:bg-primary-foreground/10 bg-primary-foreground/5"
                 >
                   {slides[currentSlide].secondaryCta.text}
@@ -177,8 +178,6 @@ const Hero = () => {
           </AnimatePresence>
         </div>
       </div>
-
-
 
       {/* Dots */}
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-3 z-20">

@@ -8,35 +8,49 @@ import {
 } from '@/components/ui/accordion';
 
 const deliveryZones = [
-  { area: 'Lekki Phase 1', fee: 2000 },
-  { area: 'Lekki Phase 2', fee: 2500 },
-  { area: 'Victoria Island', fee: 2000 },
-  { area: 'Ikoyi', fee: 2000 },
-  { area: 'Ajah', fee: 3000 },
-  { area: 'Ikeja', fee: 2500 },
-  { area: 'Maryland', fee: 2500 },
-  { area: 'Yaba', fee: 2500 },
-  { area: 'Surulere', fee: 2500 },
+  { area: 'Maitama', fee: 4500 },
+  { area: 'Wuse 2', fee: 4500 },
+  { area: 'Jahi', fee: 3000 },
+  { area: 'Kado', fee: 3500 },
+  { area: 'Utako', fee: 4000 },
+  { area: 'Jabi', fee: 4500 },
+  { area: 'Garki', fee: 5500 },
+  { area: 'CBD', fee: 4500 },
+  { area: 'Asokoro', fee: 6000 },
+  { area: 'Guzape', fee: 6000 },
+  { area: 'Mabushi', fee: 3500 },
+  { area: 'Gwarimpa', fee: 4000 },
+  { area: 'Karsana', fee: 5500 },
+  { area: 'Kubwa', fee: 6000 },
+  { area: 'Bwari', fee: 12000 },
+  { area: 'Gwagwalada', fee: 15000 },
+  { area: 'Karu', fee: 7000 },
+  { area: 'Jukwoyi', fee: 9000 },
+  { area: 'Lugbe', fee: 9000 },
+  { area: 'Katampe', fee: 4000 },
+  { area: 'Katampe Ext.', fee: 4500 },
+  { area: 'Dawaki', fee: 4000 },
+  { area: 'Mararaba', fee: 15000 },
 ];
 
 const deliveryOptions = [
   {
     icon: Clock,
     title: 'Same-Day Delivery',
-    description: 'Order before 2 PM for same-day delivery',
-    extra: '+₦2,000',
+    description: 'Order before 2 PM for same-day delivery in Abuja',
+    extra: 'Available',
   },
   {
     icon: Truck,
-    title: 'Next-Day Delivery',
-    description: 'Standard delivery on your chosen date',
-    extra: 'Included',
+    title: 'Nationwide Delivery',
+    description: 'We deliver to all states across Nigeria',
+    extra: 'Contact Us',
   },
   {
     icon: Zap,
     title: 'Express Delivery',
-    description: '2-hour delivery in select areas',
-    extra: '+₦5,000',
+    description: 'Faster delivery in select Abuja areas',
+    extra: 'Available',
   },
 ];
 
@@ -50,12 +64,16 @@ const faqs = [
     answer: 'Yes! You can pre-schedule deliveries up to 30 days in advance. Perfect for birthdays, anniversaries, and special occasions.',
   },
   {
-    question: 'Do you deliver outside Lagos?',
-    answer: 'Currently, we only deliver within Lagos. Contact us on WhatsApp for special arrangements for other locations.',
+    question: 'Do you deliver outside Abuja?',
+    answer: 'Yes! We deliver nationwide across Nigeria. Contact us on WhatsApp for delivery fees and timelines to your location.',
   },
   {
     question: 'What if the recipient is not available?',
     answer: 'Our delivery team will contact the recipient before delivery. If unavailable, we can leave with security or reschedule at no extra cost.',
+  },
+  {
+    question: 'Is there free delivery?',
+    answer: 'Yes, we offer free delivery on orders above ₦50,000 within central Abuja areas.',
   },
 ];
 
@@ -75,7 +93,7 @@ const DeliveryInfo = () => {
             Delivery Information
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            Fresh flowers delivered across Lagos with care and precision
+            Fresh flowers delivered across Abuja and nationwide with care and precision
           </p>
         </motion.div>
 
@@ -89,18 +107,18 @@ const DeliveryInfo = () => {
           >
             <h3 className="font-serif font-semibold text-xl mb-6 flex items-center gap-2">
               <MapPin className="w-5 h-5 text-primary" />
-              Delivery Areas
+              Abuja Delivery Areas
             </h3>
             
             <div className="bg-card rounded-xl p-6 shadow-card">
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-2 gap-3 max-h-[500px] overflow-y-auto pr-2">
                 {deliveryZones.map((zone, index) => (
                   <motion.div
                     key={zone.area}
                     initial={{ opacity: 0, x: -20 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
-                    transition={{ delay: index * 0.05 }}
+                    transition={{ delay: index * 0.02 }}
                     className="flex justify-between items-center p-3 bg-secondary/50 rounded-lg"
                   >
                     <span className="text-sm font-medium">{zone.area}</span>
@@ -112,7 +130,7 @@ const DeliveryInfo = () => {
               </div>
               
               <p className="text-xs text-muted-foreground mt-4 text-center">
-                Free delivery on orders above ₦30,000
+                Free delivery on orders above ₦50,000
               </p>
             </div>
 
