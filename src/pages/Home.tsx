@@ -1,11 +1,12 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
-import { Home } from '@/pages/Home';
-import { Shop } from '@/pages/Shop';
-import { ProductDetail } from '@/pages/ProductDetail';
-import { About } from '@/pages/About';
-import { Contact } from '@/pages/Contact';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+
+import Home from "@/pages/Home";
+import Shop from "@/pages/Shop";
+import ProductDetail from "@/pages/ProductDetail";
+import About from "@/pages/About";
+import Contact from "@/pages/Contact";
 
 function App() {
   return (

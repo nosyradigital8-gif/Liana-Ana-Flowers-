@@ -1,6 +1,6 @@
-import { Heart, Award, Truck, Star } from 'lucide-react';
+import { Heart, Award, Truck, Star } from "lucide-react";
 
-export const About = () => {
+const About = () => {
   return (
     <div className="container mx-auto px-4 py-12">
       {/* Hero Section */}
@@ -119,3 +119,5 @@ export const About = () => {
     </div>
   );
 };
+
+export default About;
