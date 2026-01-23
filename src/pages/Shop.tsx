@@ -17,7 +17,6 @@ const Shop = () => {
         <p className="text-gray-600">Browse our beautiful selection of flowers and gifts</p>
       </div>
 
-      {/* Category Filter */}
       <div className="flex flex-wrap gap-2 mb-8">
         {categories.map(cat => (
           <Button
@@ -31,7 +30,6 @@ const Shop = () => {
         ))}
       </div>
 
-      {/* Products Grid */}
       <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {filteredProducts.map(product => (
           <ProductCard key={product.id} product={product} />
