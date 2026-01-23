@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import {
   Heart,
   MapPin,
@@ -17,6 +18,13 @@ const Footer = () => {
     window.open("https://wa.me/2347031677165", "_blank");
   };
 
+  const quickLinks = [
+    { label: "Home", href: "/" },
+    { label: "Shop Flowers", href: "/shop" },
+    { label: "About Us", href: "/about" },
+    { label: "Contact", href: "/contact" },
+  ];
+
   return (
     <footer id="contact" className="bg-foreground text-primary-foreground pt-16 pb-8">
       <div className="container mx-auto px-4">
@@ -29,11 +37,13 @@ const Footer = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
           >
-            <img
-              src={logoImage}
-              alt="Lian-Ana Flowers"
-              className="h-32 w-auto mb-4 brightness-0 invert"
-            />
+            <Link to="/">
+              <img
+                src={logoImage}
+                alt="Lian-Ana Flowers"
+                className="h-32 w-auto mb-4 brightness-0 invert"
+              />
+            </Link>
             <p className="text-primary-foreground/70 text-sm mb-4">
               Handcrafted floral arrangements delivered fresh across Lagos. Making
               moments special since our founding.
@@ -56,20 +66,14 @@ const Footer = () => {
           >
             <h4 className="font-serif font-semibold text-lg mb-4">Quick Links</h4>
             <ul className="space-y-3">
-              {[
-                "Shop Flowers",
-                "Valentine's Collection",
-                "Add-ons",
-                "About Us",
-                "Contact",
-              ].map((link) => (
-                <li key={link}>
-                  <a
-                    href="#"
+              {quickLinks.map((link) => (
+                <li key={link.label}>
+                  <Link
+                    to={link.href}
                     className="text-primary-foreground/70 hover:text-primary transition-colors text-sm"
                   >
-                    {link}
-                  </a>
+                    {link.label}
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -86,15 +90,21 @@ const Footer = () => {
             <ul className="space-y-3 text-sm">
               <li className="flex items-start gap-3">
                 <Phone className="w-4 h-4 mt-0.5 text-primary" />
-                <span className="text-primary-foreground/70">
+                <a 
+                  href="tel:+2347031677165"
+                  className="text-primary-foreground/70 hover:text-primary transition-colors"
+                >
                   +234 703 167 7165
-                </span>
+                </a>
               </li>
               <li className="flex items-start gap-3">
                 <Mail className="w-4 h-4 mt-0.5 text-primary" />
-                <span className="text-primary-foreground/70">
+                <a 
+                  href="mailto:info@liananaflowers.com.ng"
+                  className="text-primary-foreground/70 hover:text-primary transition-colors"
+                >
                   info@liananaflowers.com.ng
-                </span>
+                </a>
               </li>
               <li className="flex items-start gap-3">
                 <MapPin className="w-4 h-4 mt-0.5 text-primary" />
@@ -121,14 +131,18 @@ const Footer = () => {
             <h4 className="font-serif font-semibold text-lg mb-4">Follow Us</h4>
             <div className="flex gap-3">
               <motion.a
-                href="#"
+                href="https://instagram.com"
+                target="_blank"
+                rel="noopener noreferrer"
                 whileHover={{ scale: 1.1 }}
                 className="w-10 h-10 rounded-full bg-primary-foreground/10 flex items-center justify-center hover:bg-primary transition-colors"
               >
                 <Instagram className="w-5 h-5" />
               </motion.a>
               <motion.a
-                href="#"
+                href="https://facebook.com"
+                target="_blank"
+                rel="noopener noreferrer"
                 whileHover={{ scale: 1.1 }}
                 className="w-10 h-10 rounded-full bg-primary-foreground/10 flex items-center justify-center hover:bg-primary transition-colors"
               >

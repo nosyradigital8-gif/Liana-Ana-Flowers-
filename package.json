@@ -1,8 +1,20 @@
 {
   "name": "vite_react_shadcn_ts",
-  "private": true,
   "version": "0.0.0",
+  "private": true,
+  "description": "**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID",
+  "homepage": "https://github.com/nosyradigital8-gif/Liana-Ana-Flowers-#readme",
+  "bugs": {
+    "url": "https://github.com/nosyradigital8-gif/Liana-Ana-Flowers-/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nosyradigital8-gif/Liana-Ana-Flowers-.git"
+  },
+  "license": "ISC",
+  "author": "",
   "type": "module",
+  "main": "eslint.config.js",
   "scripts": {
     "dev": "vite",
     "build": "vite build",

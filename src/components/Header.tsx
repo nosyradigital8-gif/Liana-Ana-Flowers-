@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ShoppingBag, Menu, X, MessageCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -10,17 +11,17 @@ import logoLight from '@/assets/logo-light.png'; // white logo
 import logoDark from '@/assets/logo-dark.png';   // pink logo
 
 const navItems = [
-  { label: 'Home', href: '#' },
-  { label: 'Shop Flowers', href: '#products' },
-  { label: 'Add-ons', href: '#addons' },
-  { label: 'About', href: '#about' },
-  { label: 'Contact', href: '#contact' },
+  { label: 'Home', href: '/' },
+  { label: 'Shop Flowers', href: '/shop' },
+  { label: 'About', href: '/about' },
+  { label: 'Contact', href: '/contact' },
 ];
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { totalItems, setIsCartOpen } = useCart();
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -32,6 +33,14 @@ const Header = () => {
 
   const handleWhatsAppClick = () => {
     window.open('https://wa.me/2347031677165', '_blank');
+  };
+
+  // Check if current route is active
+  const isActive = (href: string) => {
+    if (href === '/') {
+      return location.pathname === '/';
+    }
+    return location.pathname.startsWith(href);
   };
 
   return (
@@ -51,46 +60,52 @@ const Header = () => {
           <nav className="flex items-center justify-between">
 
             {/* ===== LOGO (AUTO LIGHT / DARK + BIGGER) ===== */}
-            <motion.a
-              href="#"
-              whileHover={{ scale: 1.04 }}
-              className="flex items-center"
-            >
-              <motion.img
-                key={isScrolled ? 'logo-dark' : 'logo-light'}
-                src={isScrolled ? logoDark : logoLight}
-                alt="Lian-Ana Flowers"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.3 }}
-                className={`h-28 md:h-20 w-auto object-contain transition-all ${
-                  !isScrolled
-                    ? 'drop-shadow-[0_3px_12px_rgba(0,0,0,0.5)]'
-                    : ''
-                }`}
-              />
-            </motion.a>
+            <motion.div whileHover={{ scale: 1.04 }} className="flex items-center">
+              <Link to="/">
+                <motion.img
+                  key={isScrolled ? 'logo-dark' : 'logo-light'}
+                  src={isScrolled ? logoDark : logoLight}
+                  alt="Lian-Ana Flowers"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.3 }}
+                  className={`h-28 md:h-20 w-auto object-contain transition-all ${
+                    !isScrolled
+                      ? 'drop-shadow-[0_3px_12px_rgba(0,0,0,0.5)]'
+                      : ''
+                  }`}
+                />
+              </Link>
+            </motion.div>
 
             {/* ===== DESKTOP NAV ===== */}
             <div className="hidden lg:flex items-center gap-8">
               {navItems.map((item) => (
-                <motion.a
-                  key={item.label}
-                  href={item.href}
-                  whileHover={{ scale: 1.05 }}
-                  className={`relative font-medium transition-colors ${
-                    isScrolled
-                      ? 'text-foreground/80 hover:text-primary'
-                      : 'text-white hover:text-white/80'
-                  }`}
-                >
-                  {item.label}
-                  <motion.span
-                    className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary"
-                    whileHover={{ width: '100%' }}
-                    transition={{ duration: 0.2 }}
-                  />
-                </motion.a>
+                <motion.div key={item.label} whileHover={{ scale: 1.05 }}>
+                  <Link
+                    to={item.href}
+                    className={`relative font-medium transition-colors ${
+                      isActive(item.href)
+                        ? isScrolled
+                          ? 'text-primary'
+                          : 'text-white font-semibold'
+                        : isScrolled
+                        ? 'text-foreground/80 hover:text-primary'
+                        : 'text-white hover:text-white/80'
+                    }`}
+                  >
+                    {item.label}
+                    {isActive(item.href) && (
+                      <motion.span
+                        layoutId="activeLink"
+                        className={`absolute -bottom-1 left-0 right-0 h-0.5 ${
+                          isScrolled ? 'bg-primary' : 'bg-white'
+                        }`}
+                        transition={{ type: 'spring', stiffness: 380, damping: 30 }}
+                      />
+                    )}
+                  </Link>
+                </motion.div>
               ))}
             </div>
 
@@ -108,32 +123,32 @@ const Header = () => {
               </Button>
 
               {/* ===== CART (AUTO COLOR) ===== */}
-              
-<button
-  onClick={() => setIsCartOpen(true)}
-  className="relative flex items-center justify-center p-2 bg-transparent border-none outline-none
-             hover:bg-transparent focus:bg-transparent active:bg-transparent"
->
-  <ShoppingBag
-    className={`w-5 h-5 transition-colors ${
-      isScrolled ? 'text-primary' : 'text-white'
-    }`}
-  />
+              <button
+                onClick={() => setIsCartOpen(true)}
+                className="relative flex items-center justify-center p-2 bg-transparent border-none outline-none
+                           hover:bg-transparent focus:bg-transparent active:bg-transparent"
+              >
+                <ShoppingBag
+                  className={`w-5 h-5 transition-colors ${
+                    isScrolled ? 'text-primary' : 'text-white'
+                  }`}
+                />
 
-  <AnimatePresence>
-    {totalItems > 0 && (
-      <motion.span
-        initial={{ scale: 0 }}
-        animate={{ scale: 1 }}
-        exit={{ scale: 0 }}
-        className="absolute -top-2 -right-2 w-5 h-5 bg-accent text-accent-foreground
-                   text-xs font-bold rounded-full flex items-center justify-center"
-      >
-        {totalItems}
-      </motion.span>
-    )}
-  </AnimatePresence>
-</button>
+                <AnimatePresence>
+                  {totalItems > 0 && (
+                    <motion.span
+                      initial={{ scale: 0 }}
+                      animate={{ scale: 1 }}
+                      exit={{ scale: 0 }}
+                      className="absolute -top-2 -right-2 w-5 h-5 bg-accent text-accent-foreground
+                                 text-xs font-bold rounded-full flex items-center justify-center"
+                    >
+                      {totalItems}
+                    </motion.span>
+                  )}
+                </AnimatePresence>
+              </button>
+
               {/* ===== HAMBURGER ===== */}
               <Button
                 variant="ghost"
@@ -162,11 +177,13 @@ const Header = () => {
           >
             {/* Mobile Header */}
             <div className="flex items-center justify-between p-6 border-b">
-              <img
-                src={logoDark}
-                alt="Logo"
-                className="h-14 w-auto object-contain"
-              />
+              <Link to="/" onClick={() => setIsMobileMenuOpen(false)}>
+                <img
+                  src={logoDark}
+                  alt="Logo"
+                  className="h-14 w-auto object-contain"
+                />
+              </Link>
               <Button
                 variant="ghost"
                 size="icon"
@@ -179,17 +196,24 @@ const Header = () => {
             {/* Mobile Links */}
             <div className="flex flex-col p-6">
               {navItems.map((item, index) => (
-                <motion.a
+                <motion.div
                   key={item.label}
-                  href={item.href}
                   initial={{ opacity: 0, x: 40 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: index * 0.08 }}
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="py-4 text-lg font-semibold border-b border-border text-foreground hover:text-primary"
                 >
-                  {item.label}
-                </motion.a>
+                  <Link
+                    to={item.href}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className={`block py-4 text-lg font-semibold border-b border-border transition-colors ${
+                      isActive(item.href)
+                        ? 'text-primary'
+                        : 'text-foreground hover:text-primary'
+                    }`}
+                  >
+                    {item.label}
+                  </Link>
+                </motion.div>
               ))}
 
               <Button
