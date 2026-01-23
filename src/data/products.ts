@@ -1,3 +1,35 @@
+// Import images from assets
+import roses40 from '@/assets/products/roses-40.jpg';
+import roses30 from '@/assets/products/roses-30.jpg';
+import roses25 from '@/assets/products/roses-25.jpg';
+import roses100 from '@/assets/products/roses-100.jpg';
+import roses6 from '@/assets/products/roses-6.jpg';
+import roses10 from '@/assets/products/roses-10.jpg';
+import roseBox1 from '@/assets/products/rose-box-1.jpg';
+import roseBox2 from '@/assets/products/rose-box-2.jpg';
+import heartBox from '@/assets/products/heart-box.jpg';
+import mixed30 from '@/assets/products/mixed-30.jpg';
+import mixedColorful from '@/assets/products/mixed-colorful.jpg';
+import mixedStandard from '@/assets/products/mixed-standard.jpg';
+import mixedBox from '@/assets/products/mixed-box.jpg';
+import pinkBabyBreath from '@/assets/products/pink-baby-breath.jpg';
+import roses20Baby from '@/assets/products/roses-20-baby.jpg';
+import elegantLush from '@/assets/products/elegant-lush.jpg';
+import miniMixed from '@/assets/products/mini-mixed.jpg';
+import elegantMixed from '@/assets/products/elegant-mixed-bouquet.jpg';
+import miniRed from '@/assets/products/mini-red.jpg';
+import dozenMixed from '@/assets/products/dozen-mixed.jpg';
+import miniRedRoses from '@/assets/products/mini-red-roses.jpg';
+import luxuryMini from '@/assets/products/luxury-mini.jpg';
+import ferreroRocher from '@/assets/products/ferrero-rocher.jpg';
+import champagne from '@/assets/products/champagne.jpg';
+import mixedBoxBalloon from '@/assets/products/mixed-box-balloon.jpg';
+import luxuryCombo from '@/assets/products/luxury-combo.jpg';
+import wine from '@/assets/products/wine.jpg';
+import specialCakes from '@/assets/products/special-cakes.jpg';
+import luxuryCakes from '@/assets/products/luxury-cakes.jpg';
+import pinkMixed50 from '@/assets/products/pink-mixed-50.jpg';
+
 export interface Product {
   id: string;
   name: string;
@@ -17,7 +49,7 @@ export const products: Product[] = [
     name: '40 Stems Lush Red Roses',
     price: '276000',
     category: 'roses',
-    image: 'https://images.unsplash.com/photo-1518895949257-7621c3c786d7?w=500&h=500&fit=crop',
+    image: roses40,
     description: 'Luxurious bouquet of 40 fresh, premium red roses perfectly arranged',
   },
   {
@@ -25,7 +57,7 @@ export const products: Product[] = [
     name: '30 Stems Red Roses',
     price: '241500',
     category: 'roses',
-    image: 'https://images.unsplash.com/photo-1455659817273-f96807779a8a?w=500&h=500&fit=crop',
+    image: roses30,
     description: 'Beautiful arrangement of 30 fresh red roses',
   },
   {
@@ -33,7 +65,7 @@ export const products: Product[] = [
     name: '25 Stem Red Roses',
     price: '175000',
     category: 'roses',
-    image: 'https://images.unsplash.com/photo-1582794543139-8ac9cb0f7b11?w=500&h=500&fit=crop',
+    image: roses25,
     description: 'Classic bouquet of 25 stunning red roses',
   },
   {
@@ -41,7 +73,7 @@ export const products: Product[] = [
     name: '100 Stem Red Roses',
     price: '700000',
     category: 'roses',
-    image: 'https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=500&h=500&fit=crop',
+    image: roses100,
     description: 'Grand arrangement of 100 premium red roses for special occasions',
     featured: true,
   },
@@ -50,7 +82,7 @@ export const products: Product[] = [
     name: '6 Stem Red Roses',
     price: '45000',
     category: 'roses',
-    image: 'https://images.unsplash.com/photo-1563241527-3004b7be0ffd?w=500&h=500&fit=crop',
+    image: roses6,
     description: 'Perfect small bouquet of 6 red roses',
   },
   {
@@ -58,7 +90,7 @@ export const products: Product[] = [
     name: '10 Stem Red Roses',
     price: '70000',
     category: 'roses',
-    image: 'https://images.unsplash.com/photo-1587814213271-7a9ac0fa2155?w=500&h=500&fit=crop',
+    image: roses10,
     description: 'Elegant 10 red roses arrangement',
   },
   {
@@ -66,7 +98,7 @@ export const products: Product[] = [
     name: 'Red Rose Box',
     price: '182500',
     category: 'boxes',
-    image: 'https://images.unsplash.com/photo-1606394733385-21e7c849d95d?w=500&h=500&fit=crop',
+    image: roseBox1,
     description: 'Luxurious red roses in an elegant box',
   },
   {
@@ -74,7 +106,7 @@ export const products: Product[] = [
     name: 'Red Rose Box 2',
     price: '217000',
     category: 'boxes',
-    image: 'https://images.unsplash.com/photo-1606800052052-5a458f29f314?w=500&h=500&fit=crop',
+    image: roseBox2,
     description: 'Premium red rose box arrangement',
   },
   {
@@ -82,7 +114,7 @@ export const products: Product[] = [
     name: 'Heartshape Box',
     price: '188000',
     category: 'boxes',
-    image: 'https://images.unsplash.com/photo-1518709594023-6eab9bab7b23?w=500&h=500&fit=crop',
+    image: heartBox,
     description: 'Romantic heart-shaped box filled with fresh roses',
     featured: true,
   },
@@ -91,7 +123,7 @@ export const products: Product[] = [
     name: '30 Mixed Rose Bouquet',
     price: '215000',
     category: 'mixed',
-    image: 'https://images.unsplash.com/photo-1561181286-d3fee7d55364?w=500&h=500&fit=crop',
+    image: mixed30,
     description: 'Beautiful mix of 30 colorful roses',
   },
   {
@@ -99,7 +131,7 @@ export const products: Product[] = [
     name: 'Colorful Mixed Rose Bouquet',
     price: '355000',
     category: 'mixed',
-    image: 'https://images.unsplash.com/photo-1591886960571-74d43a9d4166?w=500&h=500&fit=crop',
+    image: mixedColorful,
     description: 'Vibrant collection of mixed color roses',
     featured: true,
   },
@@ -108,7 +140,7 @@ export const products: Product[] = [
     name: 'Mixed Standard Bouquet',
     price: '190000',
     category: 'mixed',
-    image: 'https://images.unsplash.com/photo-1487070183336-b863922373d4?w=500&h=500&fit=crop',
+    image: mixedStandard,
     description: 'Standard mixed flower arrangement',
   },
   {
@@ -116,7 +148,7 @@ export const products: Product[] = [
     name: 'Mixed Box Flower Arrangement',
     price: '185000',
     category: 'boxes',
-    image: 'https://images.unsplash.com/photo-1606225457115-9b0de873c5db?w=500&h=500&fit=crop',
+    image: mixedBox,
     description: 'Mixed flowers beautifully arranged in a box',
   },
   {
@@ -124,7 +156,7 @@ export const products: Product[] = [
     name: "Pink Roses and Baby's Breath Mix",
     price: '170500',
     category: 'mixed',
-    image: 'https://images.unsplash.com/photo-1496062031456-07b8f162a322?w=500&h=500&fit=crop',
+    image: pinkBabyBreath,
     description: "Delicate pink roses with baby's breath",
   },
   {
@@ -132,7 +164,7 @@ export const products: Product[] = [
     name: "20 Roses as Baby's Breath",
     price: '179500',
     category: 'mixed',
-    image: 'https://images.unsplash.com/photo-1578588465574-07073aa53d1c?w=500&h=500&fit=crop',
+    image: roses20Baby,
     description: "20 roses paired with soft baby's breath",
   },
   {
@@ -140,7 +172,7 @@ export const products: Product[] = [
     name: 'Elegant Lush Red Rose',
     price: '74000',
     category: 'roses',
-    image: 'https://images.unsplash.com/photo-1518709594023-6eab9bab7b23?w=500&h=500&fit=crop',
+    image: elegantLush,
     description: 'Elegant red rose arrangement',
   },
   {
@@ -148,7 +180,7 @@ export const products: Product[] = [
     name: 'Elegant Mini Bouquet',
     price: '45000',
     category: 'mixed',
-    image: 'https://images.unsplash.com/photo-1563241527-3004b7be0ffd?w=500&h=500&fit=crop',
+    image: miniMixed,
     description: 'Charming mini mixed bouquet',
   },
   {
@@ -156,7 +188,7 @@ export const products: Product[] = [
     name: 'Elegant Mixed Bouquet of Flowers',
     price: '150000',
     category: 'mixed',
-    image: 'https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=500&h=500&fit=crop',
+    image: elegantMixed,
     description: 'Sophisticated mixed flower bouquet',
   },
   {
@@ -164,7 +196,7 @@ export const products: Product[] = [
     name: 'Elegant Lush Mini Red Roses',
     price: '69000',
     category: 'roses',
-    image: 'https://images.unsplash.com/photo-1455659817273-f96807779a8a?w=500&h=500&fit=crop',
+    image: miniRed,
     description: 'Lush mini red rose arrangement',
   },
   {
@@ -172,7 +204,7 @@ export const products: Product[] = [
     name: 'Elegant Dozen Mixed Roses',
     price: '89000',
     category: 'mixed',
-    image: 'https://images.unsplash.com/photo-1582794543139-8ac9cb0f7b11?w=500&h=500&fit=crop',
+    image: dozenMixed,
     description: 'A dozen mixed roses elegantly arranged',
   },
   {
@@ -180,7 +212,7 @@ export const products: Product[] = [
     name: 'Elegant Mini Red Roses',
     price: '50000',
     category: 'roses',
-    image: 'https://images.unsplash.com/photo-1518895949257-7621c3c786d7?w=500&h=500&fit=crop',
+    image: miniRedRoses,
     description: 'Cute mini red roses bouquet',
   },
   {
@@ -188,7 +220,7 @@ export const products: Product[] = [
     name: 'Luxury Mini Red Rose',
     price: '85000',
     category: 'roses',
-    image: 'https://images.unsplash.com/photo-1587814213271-7a9ac0fa2155?w=500&h=500&fit=crop',
+    image: luxuryMini,
     description: 'Luxury mini red rose arrangement',
   },
   {
@@ -196,7 +228,7 @@ export const products: Product[] = [
     name: 'Ferrero Rocher Chocolate Cakes',
     price: '20000',
     category: 'extras',
-    image: 'https://images.unsplash.com/photo-1549007994-cb92caebd54b?w=500&h=500&fit=crop',
+    image: ferreroRocher,
     description: 'Delicious Ferrero Rocher chocolate cakes',
   },
   {
@@ -205,7 +237,7 @@ export const products: Product[] = [
     price: '14000',
     category: 'extras',
     note: 'per bottle',
-    image: 'https://images.unsplash.com/photo-1547595628-c61a29f496f0?w=500&h=500&fit=crop',
+    image: champagne,
     description: 'Premium gold champagne to celebrate',
   },
   {
@@ -213,7 +245,7 @@ export const products: Product[] = [
     name: 'Elegant Mixed Box of Rose with Balloon',
     price: '202000',
     category: 'boxes',
-    image: 'https://images.unsplash.com/photo-1606394733385-21e7c849d95d?w=500&h=500&fit=crop',
+    image: mixedBoxBalloon,
     description: 'Mixed roses in elegant box with balloon',
   },
   {
@@ -223,7 +255,7 @@ export const products: Product[] = [
     originalPrice: '1232000',
     category: 'roses',
     sale: true,
-    image: 'https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=500&h=500&fit=crop',
+    image: luxuryCombo,
     description: 'Ultimate luxury combo with 100, 50, and 25 stem arrangements',
     featured: true,
   },
@@ -232,7 +264,7 @@ export const products: Product[] = [
     name: 'Luxury Latina Wine',
     price: '18500',
     category: 'extras',
-    image: 'https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=500&h=500&fit=crop',
+    image: wine,
     description: 'Fine Luxury Latina wine',
   },
   {
@@ -240,7 +272,7 @@ export const products: Product[] = [
     name: 'Special Mini Cakes',
     price: '3500',
     category: 'extras',
-    image: 'https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=500&h=500&fit=crop',
+    image: specialCakes,
     description: 'Special mini cakes for celebrations',
   },
   {
@@ -248,7 +280,7 @@ export const products: Product[] = [
     name: 'Luxury Mini Cakes',
     price: '3000',
     category: 'extras',
-    image: 'https://images.unsplash.com/photo-1558636508-e0db3814bd1d?w=500&h=500&fit=crop',
+    image: luxuryCakes,
     description: 'Luxury mini cakes',
   },
   {
@@ -256,7 +288,7 @@ export const products: Product[] = [
     name: '50 Mixed Pink Rose Bouquet',
     price: '335000',
     category: 'mixed',
-    image: 'https://images.unsplash.com/photo-1496062031456-07b8f162a322?w=500&h=500&fit=crop',
+    image: pinkMixed50,
     description: 'Stunning bouquet of 50 mixed pink roses',
   },
 ];
