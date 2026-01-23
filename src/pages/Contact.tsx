@@ -92,19 +92,42 @@ const Contact = () => {
       {/* Success Toast */}
       {showToast && (
         <motion.div
-          initial={{ opacity: 0, y: -50 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, y: -50, x: 100 }}
+          animate={{ opacity: 1, y: 0, x: 0 }}
           exit={{ opacity: 0, y: -50 }}
-          className="fixed top-4 right-4 z-50 bg-green-500 text-white px-6 py-4 rounded-lg shadow-2xl flex items-center gap-3 max-w-md"
+          style={{
+            position: 'fixed',
+            top: '1rem',
+            right: '1rem',
+            zIndex: 9999,
+            backgroundColor: '#10b981',
+            color: 'white',
+            padding: '1rem 1.5rem',
+            borderRadius: '0.75rem',
+            boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '0.75rem',
+            maxWidth: '28rem'
+          }}
         >
-          <CheckCircle className="w-6 h-6 flex-shrink-0" />
-          <div>
-            <p className="font-semibold">Message Sent Successfully!</p>
-            <p className="text-sm text-green-100">We'll get back to you soon.</p>
+          <CheckCircle style={{ width: '1.5rem', height: '1.5rem', flexShrink: 0 }} />
+          <div style={{ flex: 1 }}>
+            <p style={{ fontWeight: 600, marginBottom: '0.25rem' }}>Message Sent Successfully!</p>
+            <p style={{ fontSize: '0.875rem', opacity: 0.9 }}>We'll get back to you soon.</p>
           </div>
           <button
             onClick={() => setShowToast(false)}
-            className="ml-4 text-white hover:text-green-100 text-xl leading-none"
+            style={{
+              marginLeft: '1rem',
+              color: 'white',
+              fontSize: '1.25rem',
+              lineHeight: 1,
+              background: 'none',
+              border: 'none',
+              cursor: 'pointer',
+              padding: '0.25rem'
+            }}
           >
             ✕
           </button>
