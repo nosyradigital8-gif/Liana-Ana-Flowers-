@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Phone, Mail, MapPin, Clock, Send, MessageCircle } from 'lucide-react';
+import { Phone, Mail, MapPin, Clock, Send, MessageCircle, CheckCircle } from 'lucide-react';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -11,16 +11,46 @@ const Contact = () => {
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showToast, setShowToast] = useState(false);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = async () => {
+    if (!formData.name || !formData.email || !formData.message) {
+      alert('Please fill in all required fields');
+      return;
+    }
+
     setIsSubmitting(true);
     
-    setTimeout(() => {
-      alert('Thank you for your message! We will get back to you soon.');
+    try {
+      const formDataObj = new FormData();
+      formDataObj.append('name', formData.name);
+      formDataObj.append('email', formData.email);
+      formDataObj.append('phone', formData.phone);
+      formDataObj.append('message', formData.message);
+      formDataObj.append('_subject', 'New message from Lianana Flowers website!');
+      formDataObj.append('_captcha', 'false');
+      formDataObj.append('_template', 'table');
+      
+      await fetch('https://formsubmit.co/info@liananaflowers.com.ng', {
+        method: 'POST',
+        body: formDataObj,
+        headers: {
+          'Accept': 'application/json'
+        }
+      });
+      
+      setShowToast(true);
       setFormData({ name: '', email: '', phone: '', message: '' });
+      
+      setTimeout(() => {
+        setShowToast(false);
+      }, 5000);
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      alert('There was an error sending your message. Please try again.');
+    } finally {
       setIsSubmitting(false);
-    }, 1000);
+    }
   };
 
   const handleChange = (e) => {
@@ -59,6 +89,28 @@ const Contact = () => {
 
   return (
     <div>
+      {/* Success Toast */}
+      {showToast && (
+        <motion.div
+          initial={{ opacity: 0, y: -50 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -50 }}
+          className="fixed top-4 right-4 z-50 bg-green-500 text-white px-6 py-4 rounded-lg shadow-2xl flex items-center gap-3 max-w-md"
+        >
+          <CheckCircle className="w-6 h-6 flex-shrink-0" />
+          <div>
+            <p className="font-semibold">Message Sent Successfully!</p>
+            <p className="text-sm text-green-100">We'll get back to you soon.</p>
+          </div>
+          <button
+            onClick={() => setShowToast(false)}
+            className="ml-4 text-white hover:text-green-100 text-xl leading-none"
+          >
+            ✕
+          </button>
+        </motion.div>
+      )}
+
       {/* Page Header Hero */}
       <div className="relative h-[45vh] min-h-[500px] flex items-center justify-center overflow-hidden bg-gradient-to-br from-pink-600 via-rose-600 to-pink-700">
         <div className="absolute inset-0 opacity-10">
