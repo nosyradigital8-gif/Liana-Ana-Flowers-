@@ -1,69 +1,65 @@
 import { motion } from 'framer-motion';
 import { Heart, Flower2, Box, Gift, Sparkles } from 'lucide-react';
-import bouquet1 from '@/assets/bouquet-1.jpg';
-import bouquet2 from '@/assets/bouquet-2.jpg';
-import bouquet3 from '@/assets/bouquet-3.jpg';
+import { products } from '@/data/products'; // your products array
 
+// Helper: get the first product image for a category
+const getCategoryImage = (category: string) => {
+  const product = products.find(p => p.category === category);
+  return product ? product.image : '';
+};
+
+// Categories array using images from products
 const categories = [
   {
     id: 'all-products',
     name: 'All Products',
     description: 'Browse our complete collection',
     icon: Sparkles,
-    image: bouquet1,
-    count: 30,
+    image: getCategoryImage('roses') || getCategoryImage('mixed'), // fallback
+    count: products.length,
   },
   {
     id: 'red-roses',
     name: 'Red Roses',
     description: 'Classic romance and elegance',
     icon: Heart,
-    image: bouquet2,
-    count: 11,
+    image: getCategoryImage('roses'),
+    count: products.filter(p => p.category === 'roses').length,
   },
   {
     id: 'mixed-bouquets',
     name: 'Mixed Bouquets',
     description: 'Colorful floral arrangements',
     icon: Flower2,
-    image: bouquet3,
-    count: 9,
+    image: getCategoryImage('mixed'),
+    count: products.filter(p => p.category === 'mixed').length,
   },
   {
     id: 'box-arrangements',
     name: 'Box Arrangements',
     description: 'Elegant boxed presentations',
     icon: Box,
-    image: bouquet1,
-    count: 5,
+    image: getCategoryImage('boxes'),
+    count: products.filter(p => p.category === 'boxes').length,
   },
   {
     id: 'extras',
     name: 'Extras',
     description: 'Perfect gift additions',
     icon: Gift,
-    image: bouquet2,
-    count: 5,
+    image: getCategoryImage('extras'),
+    count: products.filter(p => p.category === 'extras').length,
   },
 ];
 
 const containerVariants = {
   hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.1,
-    },
-  },
+  visible: { opacity: 1, transition: { staggerChildren: 0.1 } },
 };
 
 const itemVariants = {
   hidden: { opacity: 0, y: 30 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.5, ease: 'easeOut' },
-  },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: 'easeOut' } },
 };
 
 const Categories = () => {
@@ -109,7 +105,7 @@ const Categories = () => {
                 whileHover={{ scale: 1.1 }}
                 transition={{ duration: 0.4 }}
               />
-              
+
               {/* Overlay */}
               <div className="absolute inset-0 bg-gradient-to-t from-foreground/80 via-foreground/40 to-transparent" />
 
