@@ -55,7 +55,7 @@ const About = () => {
               About Lian-Ana Flowers
             </h1>
             <p className="text-lg md:text-xl text-white/90 max-w-3xl mx-auto">
-              Lagos's premier destination for exquisite floral arrangements and heartfelt gifting
+              Abuja's premier destination for exquisite floral arrangements and heartfelt gifting, delivering nationwide
             </p>
           </motion.div>
         </div>
@@ -87,8 +87,8 @@ const About = () => {
             <div className="space-y-4 text-gray-700 text-base md:text-lg leading-relaxed">
               <p>
                 Welcome to Lian-Ana Flowers, where passion meets petals. Founded with a love for 
-                bringing joy through beautiful blooms, we have become Lagos's trusted choice for 
-                premium flower arrangements and thoughtful gifts.
+                bringing joy through beautiful blooms, we have become Abuja's trusted choice for 
+                premium flower arrangements and thoughtful gifts, now serving customers across Nigeria.
               </p>
               <p>
                 With years of experience in the floral industry, we pride ourselves on sourcing 
@@ -130,8 +130,8 @@ const About = () => {
               },
               {
                 icon: Truck,
-                title: 'Same Day Delivery',
-                description: 'Fast and reliable delivery throughout Lagos with care and precision',
+                title: 'Nationwide Delivery',
+                description: 'Same-day delivery in Abuja with reliable nationwide shipping across Nigeria',
                 color: 'pink'
               },
               {
@@ -187,8 +187,8 @@ const About = () => {
                 <ul className="space-y-4">
                   {[
                     'Fresh, premium-quality flowers',
-                    'Same-day delivery in Lagos',
-                    'Professional florist arrangements'
+                    'Same-day delivery in Abuja',
+                    'Nationwide delivery available'
                   ].map((item, index) => (
                     <motion.li
                       key={index}
@@ -205,7 +205,7 @@ const About = () => {
                 </ul>
                 <ul className="space-y-4">
                   {[
-                    'Competitive, transparent pricing',
+                    'Professional florist arrangements',
                     'Exceptional customer service',
                     'Satisfaction guaranteed'
                   ].map((item, index) => (

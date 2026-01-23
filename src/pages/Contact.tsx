@@ -12,7 +12,7 @@ const Contact = () => {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = (e: React.MouseEvent) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     setIsSubmitting(true);
     
@@ -23,9 +23,7 @@ const Contact = () => {
     }, 1000);
   };
 
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
+  const handleChange = (e) => {
     setFormData(prev => ({
       ...prev,
       [e.target.name]: e.target.value,
@@ -48,7 +46,7 @@ const Contact = () => {
     {
       icon: MapPin,
       title: 'Location',
-      details: ['Lagos, Nigeria', 'We deliver across Lagos'],
+      details: ['Abuja, Nigeria', 'Nationwide delivery available'],
       color: 'rose'
     },
     {
@@ -294,7 +292,7 @@ const Contact = () => {
                 Ready to Order Beautiful Flowers?
               </h3>
               <p className="text-white/90 mb-6 max-w-2xl mx-auto">
-                Browse our stunning collection of fresh flowers and gift packages. Same-day delivery available across Lagos.
+                Browse our stunning collection of fresh flowers and gift packages. Same-day delivery in Abuja, nationwide shipping available.
               </p>
               <button
                 onClick={() => window.location.href = '/shop'}
