@@ -48,6 +48,7 @@ const timeSlots = [
   { id: 'evening', label: 'Evening (4 PM - 7 PM)', value: '4:00 PM - 7:00 PM' },
 ];
 
+
 const deliverySchema = z.object({
   recipientName: z.string().trim().min(2, 'Name must be at least 2 characters').max(100, 'Name too long'),
   recipientPhone: z.string().regex(/^(\+234|0)[789][01]\d{8}$/, 'Enter a valid Nigerian phone number'),
@@ -210,7 +211,7 @@ I'll send my payment receipt now for confirmation.
 Thank you! 💐`;
 
     const encodedMessage = encodeURIComponent(message);
-    window.open(`https://wa.me/2347031677165?text=${encodedMessage}`, '_blank');
+    window.open(`https://wa.me/2348027284020?text=${encodedMessage}`, '_blank');
     clearCart();
     navigate('/');
     toast({
