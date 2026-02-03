@@ -132,7 +132,7 @@ const HowItWorks = () => {
         >
           <Button
             size="lg"
-            onClick={() => window.open('https://wa.me/2347031677165', '_blank')}
+            onClick={() => window.open('https://wa.me/2348027284020', '_blank')}
             className="h-14 px-8 bg-[#25D366] hover:bg-[#20BD5C] text-primary-foreground"
           >
             <MessageCircle className="w-5 h-5 mr-2" />
