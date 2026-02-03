@@ -61,7 +61,7 @@ const Hero = () => {
   const handleCtaClick = (action, isWhatsApp) => {
     if (isWhatsApp) {
       const message = encodeURIComponent(`Hello! I'm interested in ordering flowers from your ${slides[currentSlide].badge} collection.`);
-      window.open(`https://wa.me/2347031677165?text=${message}`, '_blank');
+      window.open(`https://wa.me/2348027284020?text=${message}`, '_blank');
     } else {
       window.location.href = action;
     }
