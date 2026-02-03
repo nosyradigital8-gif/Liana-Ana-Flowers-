@@ -9,7 +9,7 @@ const WHATSAPP_NUMBER = "2348027284020";
 
 const Home = () => {
   const handleWhatsApp = () => {
-    const message = encodeURIComponent("Hi Diffusers N More, I'd like to chat!");
+    const message = encodeURIComponent("Hi Lian-Ana Flowers, I'd like to chat!");
     window.open(
       `https://api.whatsapp.com/send?phone=${WHATSAPP_NUMBER}&text=${message}`,
       "_blank"
