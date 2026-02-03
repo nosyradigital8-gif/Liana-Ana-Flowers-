@@ -15,7 +15,7 @@ import logoImage from "@/assets/logo-light.png";
 
 const Footer = () => {
   const handleWhatsAppClick = () => {
-    window.open("https://wa.me/2347031677165", "_blank");
+    window.open("https://wa.me/2348027284020", "_blank");
   };
 
   const quickLinks = [
@@ -93,7 +93,7 @@ const Footer = () => {
                   href="tel:+2347031677165"
                   className="text-primary-foreground/70 hover:text-primary transition-colors"
                 >
-                  +234 703 167 7165
+                  +2348027284020
                 </a>
               </li>
               <li className="flex items-start gap-3">
