@@ -32,7 +32,7 @@ const Header = () => {
   }, []);
 
   const handleWhatsAppClick = () => {
-    window.open('https://wa.me/2347031677165', '_blank');
+    window.open('https://wa.me/2348027284020', '_blank');
   };
 
   // Check if current route is active
